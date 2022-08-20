@@ -2,21 +2,21 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Sample.Domain;
 
-namespace Sample.Persistence.EntityMaps.Students
+namespace Infrastructure.Data.EntityMaps.Teachers
 {
-    public class StudentEntityMap : IEntityTypeConfiguration<Student>
+    public class TeacherEntityMap : IEntityTypeConfiguration<Teacher>
     {
-        public void Configure(EntityTypeBuilder<Student> _)
+        public void Configure(EntityTypeBuilder<Teacher> _)
         {
-            _.ToTable("Students");
+            _.ToTable("Teachers");
             _.HasKey(_ => _.Id);
             _.Property(_ => _.Id).ValueGeneratedOnAdd();
             _.Property(_ => _.Name);
             _.Property(_ => _.NationalCode);
             _.Property(_ => _.PhoneNumber);
             _.HasMany(_ => _.Courses)
-                .WithOne(_ => _.Student)
-                .HasForeignKey(_ => _.StudentId);
+                .WithOne(_ => _.Teacher)
+                .HasForeignKey(_ => _.TeacherId);
         }
     }
 }

@@ -8,7 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{30F17B08-2350-4450-B3BA-8346D38B3508}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{C6BDBE31-314A-4BB5-A604-86643977E526}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure.Data", "Infrastructure.Data", "{C6BDBE31-314A-4BB5-A604-86643977E526}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure.Dependency", "Infrastructure.Dependency", "{843166E9-9B35-430C-B7D3-999BC089CEAF}"
 EndProject
@@ -22,7 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Application", "Sampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Domain", "Sample.Domain\Sample.Domain.csproj", "{04D94B95-B74C-4E66-BDBA-528C8B165B47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.Persistence", "Sample.Persistence\Sample.Persistence.csproj", "{CF64A550-E20F-4425-812D-6964AA0F5854}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Data", "Infrastructure.Data\Infrastructure.Data.csproj", "{CF64A550-E20F-4425-812D-6964AA0F5854}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrations", "Migrations", "{7C6C77FC-4D4B-4B8A-A06D-277CD9067049}"
 EndProject

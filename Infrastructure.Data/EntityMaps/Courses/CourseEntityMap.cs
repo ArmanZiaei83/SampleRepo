@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Sample.Domain;
 
-namespace Sample.Persistence.EntityMaps.Courses
+namespace Infrastructure.Data.EntityMaps.Courses
 {
     public class CourseEntityMap : IEntityTypeConfiguration<Course>
     {

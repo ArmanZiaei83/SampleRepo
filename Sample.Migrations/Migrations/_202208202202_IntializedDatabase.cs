@@ -77,10 +77,10 @@ namespace Sample.Migrations.Migrations
             Create.Table("Courses")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
                 .WithColumn("Name").AsString().NotNullable()
-                .WithColumn("StartDate").AsDateTime()
-                .WithColumn("EndDate").AsDateTime()
-                .WithColumn("StartTime").AsTime()
-                .WithColumn("EndTime").AsTime();
+                .WithColumn("StartDateTime").AsDateTime()
+                .WithColumn("EndDateTime").AsDateTime()
+                .WithColumn("StartTime").AsString()
+                .WithColumn("EndTime").AsString();
         }
 
         private void CreateTeachersTable()

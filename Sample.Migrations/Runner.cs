@@ -29,13 +29,11 @@ namespace Sample.Migrations
             var commandScript = $"if db_id(N'{databaseName}') is null " +
                                 $"create database [{databaseName}]";
 
-            using (var connection = new SqlConnection(masterConnectionString))
-            {
-                connection.Open();
-                using (var command = new SqlCommand(commandScript, connection))
-                    command.ExecuteNonQuery();
-                connection.Close();
-            }
+            using var connection = new SqlConnection(masterConnectionString);
+            connection.Open();
+            using (var command = new SqlCommand(commandScript, connection))
+                command.ExecuteNonQuery();
+            connection.Close();
         }
 
         private static string ChangeDatabaseName

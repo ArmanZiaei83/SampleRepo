@@ -6,7 +6,7 @@ namespace Sample.Domain
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        
+
         public HashSet<ClassCourse> Courses { get; set; }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-
-namespace Sample.Domain
+﻿namespace Sample.Domain
 {
     public class TeacherCourse
     {

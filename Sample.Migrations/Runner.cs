@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Sample.Migrations
 {
-    class Runner
+    internal class Runner
     {
         private static void Main(string[] args)
         {
@@ -24,7 +24,7 @@ namespace Sample.Migrations
         private static void CreateDatabase(string connectionString)
         {
             var databaseName = GetDatabaseName(connectionString);
-            string masterConnectionString = ChangeDatabaseName
+            var masterConnectionString = ChangeDatabaseName
                 (connectionString, "master");
             var commandScript = $"if db_id(N'{databaseName}') is null " +
                                 $"create database [{databaseName}]";
@@ -32,7 +32,10 @@ namespace Sample.Migrations
             using var connection = new SqlConnection(masterConnectionString);
             connection.Open();
             using (var command = new SqlCommand(commandScript, connection))
+            {
                 command.ExecuteNonQuery();
+            }
+
             connection.Close();
         }
 
@@ -73,7 +76,7 @@ namespace Sample.Migrations
             var configurations = new ConfigurationBuilder()
                 .SetBasePath(baseDir)
                 .AddJsonFile
-                    ("appsettings.json", optional: true, reloadOnChange: true)
+                    ("appsettings.json", true, true)
                 .AddEnvironmentVariables()
                 .AddCommandLine(args)
                 .Build();

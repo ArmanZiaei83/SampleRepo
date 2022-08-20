@@ -4,7 +4,8 @@ using Sample.Domain;
 
 namespace Infrastructure.Data.EntityMaps.StudentCourses
 {
-    public class StudentCourseEntityMap : IEntityTypeConfiguration<StudentCourse>
+    public class
+        StudentCourseEntityMap : IEntityTypeConfiguration<StudentCourse>
     {
         public void Configure(EntityTypeBuilder<StudentCourse> _)
         {

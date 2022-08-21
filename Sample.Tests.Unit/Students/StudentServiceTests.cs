@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Sample.Application.Contracts.Services;
 using Sample.Application.Exceptions;
+using Sample.Application.Interfaces.Services;
 using Sample.Test.Tools.Students;
 using Sample.Tests.Unit.Infrastructures;
 using Xunit;
@@ -38,16 +38,13 @@ namespace Sample.Tests.Unit.Students
         }
 
         [Theory]
-        [InlineData("093971368")]
         [InlineData("+9891736812")]
         public async Task
             Add_throws_IncorrectPhoneNumberException_when_student_phone_number_is_incorrect(
                 string invalidPhoneNumber)
         {
             var dto = new AddStudentDtoBuilder()
-                .WithName("dummy-name")
                 .WithPhoneNumber(invalidPhoneNumber)
-                .WithNationalCode("2283876524")
                 .Build();
 
             Func<Task> actualResult = () => _sut.Add(dto);
@@ -61,9 +58,7 @@ namespace Sample.Tests.Unit.Students
             Add_throws_InvalidNationalCodeException_when_student_national_code_is_invalid()
         {
             var dto = new AddStudentDtoBuilder()
-                .WithName("dummy-name")
                 .WithNationalCode("2283888888")
-                .WithPhoneNumber("9399999999")
                 .Build();
 
             Func<Task> actualResult = () => _sut.Add(dto);

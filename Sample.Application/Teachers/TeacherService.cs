@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using Sample.Application.Contracts;
-using Sample.Application.Contracts.Repositories;
-using Sample.Application.Contracts.Services;
 using Sample.Application.DTOs;
 using Sample.Application.Exceptions;
+using Sample.Application.Interfaces;
+using Sample.Application.Interfaces.Repositories;
+using Sample.Application.Interfaces.Services;
 using Sample.Domain.Entities;
 using Sample.Infrastructure.Shared;
 

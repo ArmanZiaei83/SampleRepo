@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Infrastructure.Persistence.DbContext;
-using Sample.Application.Contracts.Repositories;
+using Sample.Application.Interfaces.Repositories;
 using Sample.Domain.Entities;
 
 namespace Infrastructure.Persistence.Repositories.Students

@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Sample.Application.Contracts.Services;
 using Sample.Application.Exceptions;
+using Sample.Application.Interfaces.Services;
 using Sample.Test.Tools.Teachers;
 using Sample.Tests.Unit.Infrastructures;
 using SQLitePCL;
@@ -46,8 +46,6 @@ namespace Sample.Tests.Unit.Teachers
                 string invalidPhoneNumber)
         {
             var dto = new AddTeacherDtoBuilder()
-                .WithName("dummy-name")
-                .WithNationalCode("2283876524")
                 .WithPhoneNumber(invalidPhoneNumber)
                 .Build();
 
@@ -59,8 +57,16 @@ namespace Sample.Tests.Unit.Teachers
 
         [Fact]
         public void
-            Add_throws_InvalidNationalCodeException_when_teacher_national_code_is_incorect()
+            Add_throws_InvalidNationalCodeException_when_teacher_national_code_is_incorrect()
         {
+            var dto = new AddTeacherDtoBuilder()
+                .WithNationalCode("2283888888")
+                .Build();
+
+            Func<Task> actualResult = () => _sut.Add(dto);
+
+            actualResult.Should()
+                .ThrowExactlyAsync<InvalidNationalCodeException>();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Sample.Application.Contracts.Services;
 using Sample.Application.DTOs;
+using Sample.Application.Interfaces.Services;
 
 namespace Sample.WebApi.Controllers.Teachers
 {

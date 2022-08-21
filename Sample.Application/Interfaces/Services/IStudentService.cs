@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Sample.Application.DTOs;
 
-namespace Sample.Application.Contracts.Services
+namespace Sample.Application.Interfaces.Services
 {
     public interface IStudentService : IService
     {

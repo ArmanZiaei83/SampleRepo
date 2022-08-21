@@ -1,6 +1,6 @@
 ﻿using Sample.Domain.Entities;
 
-namespace Sample.Application.Contracts.Repositories
+namespace Sample.Application.Interfaces.Repositories
 {
     public interface ITeacherRepository : IRepository
     {

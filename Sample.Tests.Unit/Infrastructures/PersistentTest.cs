@@ -8,7 +8,7 @@ namespace Sample.Tests.Unit.Infrastructures
         protected readonly EFDataContext _dataContext;
         protected readonly EFDataContext _readDataContext;
 
-        public PersistentTest()
+        protected PersistentTest()
         {
             var memoryDatabase = new EFInMemoryDatabase();
             _dataContext = memoryDatabase.CreateDataContext<EFDataContext>();

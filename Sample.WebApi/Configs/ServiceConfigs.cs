@@ -4,9 +4,9 @@ using Infrastructure.Persistence.DbContext;
 using Infrastructure.Persistence.Repositories.Teachers;
 using Infrastructure.Persistence.UnitOfWork;
 using Microsoft.Extensions.Configuration;
-using Sample.Application.Contracts;
-using Sample.Application.Contracts.Repositories;
-using Sample.Application.Contracts.Services;
+using Sample.Application.Interfaces;
+using Sample.Application.Interfaces.Repositories;
+using Sample.Application.Interfaces.Services;
 using Sample.Application.Teachers;
 
 namespace Sample.WebApi.Configs

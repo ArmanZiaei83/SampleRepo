@@ -8,7 +8,12 @@ namespace Sample.Test.Tools.Teachers
 
         public AddTeacherDtoBuilder()
         {
-            _dto = new AddTeacherDto();
+            _dto = new AddTeacherDto
+            {
+                Name = "dummy-name",
+                PhoneNumber = "9399999999",
+                NationalCode = "2283876524"
+            };
         }
 
         public AddTeacherDtoBuilder WithName(string name)

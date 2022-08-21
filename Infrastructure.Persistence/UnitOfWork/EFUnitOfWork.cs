@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Infrastructure.Persistence.DbContext;
-using Sample.Application.Contracts;
+using Sample.Application.Interfaces;
 
 namespace Infrastructure.Persistence.UnitOfWork
 {

@@ -65,7 +65,8 @@ namespace Infrastructure.Persistence.InMemoryDatabase
         }
 
         public TDbContext CreateDataContext<TDbContext>(
-            params object[] entities) where TDbContext : Microsoft.EntityFrameworkCore.DbContext
+            params object[] entities)
+            where TDbContext : Microsoft.EntityFrameworkCore.DbContext
         {
             var dbContext = ResolveFactory<TDbContext>().Invoke();
             dbContext.Database.EnsureCreated();

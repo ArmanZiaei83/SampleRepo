@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Sample.Domain;
 using Sample.Domain.Entities;
 
 namespace Infrastructure.Persistence.DbContext

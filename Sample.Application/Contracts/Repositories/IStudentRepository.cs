@@ -1,10 +1,8 @@
-﻿using System.Threading.Tasks;
-using Sample.Domain;
-using Sample.Domain.Entities;
+﻿using Sample.Domain.Entities;
 
 namespace Sample.Application.Contracts.Repositories
 {
-    public interface IStudentRepository
+    public interface IStudentRepository : IRepository
     {
         public void Add(Student student);
     }

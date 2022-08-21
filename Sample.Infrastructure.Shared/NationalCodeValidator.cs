@@ -14,9 +14,7 @@ namespace Sample.Infrastructure.Shared
             var parity = nationalCode % 10;
             var code = nationalCode / 10;
             if (nationalCode < minLength || nationalCode > maxLength)
-            {
                 return false;
-            }
 
             long sum = 0;
             for (var position = 2; code != 0; position++)

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Sample.Domain;
 using Sample.Domain.Entities;
 
 namespace Infrastructure.Persistence.EntityMaps.Teachers

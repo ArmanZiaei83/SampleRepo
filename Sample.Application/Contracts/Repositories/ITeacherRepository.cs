@@ -2,7 +2,7 @@
 
 namespace Sample.Application.Contracts.Repositories
 {
-    public interface ITeacherRepository
+    public interface ITeacherRepository : IRepository
     {
         public void Add(Teacher teacher);
     }

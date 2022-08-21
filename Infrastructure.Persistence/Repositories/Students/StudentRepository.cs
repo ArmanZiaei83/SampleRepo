@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Infrastructure.Persistence.DbContext;
 using Sample.Application.Contracts.Repositories;
+using Sample.Domain.Entities;
 
 namespace Infrastructure.Persistence.Repositories.Students
 {
@@ -13,7 +14,7 @@ namespace Infrastructure.Persistence.Repositories.Students
             _dataContext = dataContext;
         }
 
-        public void Add(Sample.Domain.Entities.Student student)
+        public void Add(Student student)
         {
             _dataContext.Students.Add(student);
         }

@@ -4,7 +4,6 @@ using Sample.Application.Contracts.Repositories;
 using Sample.Application.Contracts.Services;
 using Sample.Application.DTOs;
 using Sample.Application.Exceptions;
-using Sample.Domain;
 using Sample.Domain.Entities;
 using Sample.Infrastructure.Shared;
 

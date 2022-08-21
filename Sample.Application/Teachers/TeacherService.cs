@@ -32,7 +32,7 @@ namespace Sample.Application.Teachers
 
             _repository.Add(teacher);
             await _unitOfWork.Complete();
-            
+
             return teacher.Id;
         }
     }

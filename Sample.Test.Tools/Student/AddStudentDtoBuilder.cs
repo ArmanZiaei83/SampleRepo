@@ -1,4 +1,4 @@
-﻿using Sample.Application.ViewModel;
+﻿using Sample.Application.DTOs;
 
 namespace Sample.Test.Tools.Student
 {

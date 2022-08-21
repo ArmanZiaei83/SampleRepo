@@ -1,5 +1,5 @@
-﻿using Chat.Infrastructure.Test;
-using Infrastructure.Data.DbContext;
+﻿using Infrastructure.Persistence.DbContext;
+using Infrastructure.Persistence.InMemoryDatabase;
 
 namespace Sample.Tests.Unit.Infrastructures
 {

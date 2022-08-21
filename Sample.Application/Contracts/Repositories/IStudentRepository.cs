@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Sample.Domain;
+using Sample.Domain.Entities;
 
 namespace Sample.Application.Contracts.Repositories
 {

@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Sample.Application.ViewModel;
+using Sample.Application.DTOs;
 
 namespace Sample.Application.Contracts.Services
 {

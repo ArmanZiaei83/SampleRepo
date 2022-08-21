@@ -1,6 +1,6 @@
-﻿using Infrastructure.Data.DbContext;
-using Infrastructure.Data.Repositories.Student;
-using Sample.Application.Services.Students;
+﻿using Infrastructure.Persistence.DbContext;
+using Infrastructure.Persistence.Repositories.Student;
+using Sample.Application.Students;
 
 namespace Sample.Test.Tools.Student
 {

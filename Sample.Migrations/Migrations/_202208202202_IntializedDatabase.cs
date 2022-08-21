@@ -18,16 +18,10 @@ namespace Sample.Migrations.Migrations
             CreateTeacherCoursesTable();
 
             CreateStudentCoursesTable();
-
-            CreateClassesTable();
-
-            CreateClassCoursesTable();
         }
 
         public override void Down()
         {
-            Delete.Table("ClassCourses");
-            Delete.Table("Classes");
             Delete.Table("StudentCourses");
             Delete.Table("TeacherCourese");
             Delete.Table("Courses");
@@ -82,23 +76,6 @@ namespace Sample.Migrations.Migrations
                 .ForeignKey("FK_StudentCourses_Students", "Students", "Id")
                 .WithColumn("CourseId").AsInt32().NotNullable()
                 .ForeignKey("FK_StudentCourses_Courses", "Courses", "Id");
-        }
-
-        private void CreateClassesTable()
-        {
-            Create.Table("Classes")
-                .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("Name").AsString().NotNullable();
-        }
-
-        private void CreateClassCoursesTable()
-        {
-            Create.Table("ClassCourses")
-                .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("ClassId").AsInt32().NotNullable()
-                .ForeignKey("FK_ClassCourses_Classes", "Classes", "Id")
-                .WithColumn("CourseId").AsInt32().NotNullable()
-                .ForeignKey("FK_ClassCourses_Courses", "Courses", "Id");
         }
     }
 }

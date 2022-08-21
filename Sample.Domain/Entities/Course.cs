@@ -12,7 +12,6 @@ namespace Sample.Domain.Entities
         public string StartTime { get; set; }
         public string EndTime { get; set; }
 
-        public List<ClassCourse> Classes { get; set; }
         public List<StudentCourse> Students { get; set; }
         public List<TeacherCourse> Teachers { get; set; }
     }

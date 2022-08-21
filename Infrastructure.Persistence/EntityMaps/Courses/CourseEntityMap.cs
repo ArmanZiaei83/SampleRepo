@@ -17,9 +17,6 @@ namespace Infrastructure.Persistence.EntityMaps.Courses
             _.Property(_ => _.StartTime);
             _.Property(_ => _.EndDateTime);
             _.Property(_ => _.StartDateTime);
-            _.HasMany(_ => _.Classes)
-                .WithOne(_ => _.Course)
-                .HasForeignKey(_ => _.CourseId);
             _.HasMany(_ => _.Students)
                 .WithOne(_ => _.Course)
                 .HasForeignKey(_ => _.CourseId);

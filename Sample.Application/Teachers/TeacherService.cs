@@ -39,7 +39,7 @@ namespace Sample.Application.Teachers
 
             return teacher.Id;
         }
-        
+
         private void ThrowExceptionWhenPhoneNumberIsIncorrect(
             string phoneNumber)
         {
@@ -47,7 +47,7 @@ namespace Sample.Application.Teachers
             if (!isValid)
                 throw new IncorrectPhoneNumberException();
         }
-        
+
         private void ThrowExceptionWhenNationalCodeIsIncorrect(
             string nationalCode)
         {

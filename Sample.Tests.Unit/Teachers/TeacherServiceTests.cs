@@ -6,7 +6,6 @@ using Sample.Application.Exceptions;
 using Sample.Application.Interfaces.Services;
 using Sample.Test.Tools.Teachers;
 using Sample.Tests.Unit.Infrastructures;
-using SQLitePCL;
 using Xunit;
 
 namespace Sample.Tests.Unit.Teachers

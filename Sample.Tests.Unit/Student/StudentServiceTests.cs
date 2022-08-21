@@ -1,9 +1,13 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
 using Sample.Application.Contracts.Services;
+using Sample.Application.Exceptions;
 using Sample.Test.Tools.Student;
 using Sample.Tests.Unit.Infrastructures;
+using SQLitePCL;
 using Xunit;
 
 namespace Sample.Tests.Unit.Student
@@ -33,6 +37,41 @@ namespace Sample.Tests.Unit.Student
             actualResult.Name.Should().Be(dto.Name);
             actualResult.NationalCode.Should().Be(dto.NationalCode);
             actualResult.PhoneNumber.Should().Be(dto.PhoneNumber);
+        }
+
+        [Theory]
+        [InlineData("093971368")]
+        [InlineData("+9891736812")]
+        public async Task
+            Add_throws_IncorrectPhoneNumberException_when_student_phone_number_is_incorrect(
+                string invalidPhoneNumber)
+        {
+            var dto = new AddStudentDtoBuilder()
+                .WithName("dummy-name")
+                .WithPhoneNumber(invalidPhoneNumber)
+                .WithNationalCode("2283876524")
+                .Build();
+
+            Func<Task> actualResult = () => _sut.Add(dto);
+
+            await actualResult.Should()
+                .ThrowExactlyAsync<IncorrectPhoneNumberException>();
+        }
+
+        [Fact]
+        public void
+            Add_throws_InvalidNationalCodeException_when_student_national_code_is_invalid()
+        {
+            var dto = new AddStudentDtoBuilder()
+                .WithName("dummy-name")
+                .WithNationalCode("2283888888")
+                .WithPhoneNumber("9399999999")
+                .Build();
+
+            Func<Task> actualResult = () => _sut.Add(dto);
+
+            actualResult.Should()
+                .ThrowExactlyAsync<InvalidNationalCodeException>();
         }
     }
 }

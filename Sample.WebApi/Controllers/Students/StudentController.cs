@@ -6,7 +6,7 @@ using Sample.Application.DTOs;
 namespace Sample.WebApi.Controllers.Students
 {
     [ApiController]
-    [Route("[controller]/students")]
+    [Route("api/students")]
     public class StudentController : ControllerBase
     {
         private readonly IStudentService _service;

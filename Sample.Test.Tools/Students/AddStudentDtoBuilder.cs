@@ -1,6 +1,6 @@
 ﻿using Sample.Application.DTOs;
 
-namespace Sample.Test.Tools.Student
+namespace Sample.Test.Tools.Students
 {
     public class AddStudentDtoBuilder
     {

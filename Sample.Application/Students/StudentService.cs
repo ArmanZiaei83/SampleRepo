@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Sample.Application.Contracts;
 using Sample.Application.Contracts.Repositories;
 using Sample.Application.Contracts.Services;
 using Sample.Application.DTOs;
@@ -12,9 +13,13 @@ namespace Sample.Application.Students
     public class StudentService : IStudentService
     {
         private readonly IStudentRepository _repository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public StudentService(IStudentRepository repository)
+        public StudentService(
+            IUnitOfWork unitOfWork,
+            IStudentRepository repository)
         {
+            _unitOfWork = unitOfWork;
             _repository = repository;
         }
 
@@ -30,7 +35,7 @@ namespace Sample.Application.Students
             };
 
             _repository.Add(student);
-            await _repository.Save();
+            await _unitOfWork.Complete();
 
             return student.Id;
         }
@@ -43,7 +48,8 @@ namespace Sample.Application.Students
                 throw new IncorrectPhoneNumberException();
         }
 
-        private void ThrowExceptionWhenNationalCodeIsIncorrect(string nationalCode)
+        private void ThrowExceptionWhenNationalCodeIsIncorrect(
+            string nationalCode)
         {
             var isValid = NationalCodeValidator.IsValid(nationalCode);
             if (!isValid)

@@ -6,7 +6,7 @@ using Sample.Domain.Entities;
 
 namespace Infrastructure.Persistence.DbContext
 {
-    public class EFDataContext : IdentityDbContext
+    public class EFDataContext : Microsoft.EntityFrameworkCore.DbContext
     {
         public EFDataContext(DbContextOptions<EFDataContext> options) : base(
             options)
@@ -32,6 +32,7 @@ namespace Infrastructure.Persistence.DbContext
         }
 
         public DbSet<Student> Students { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

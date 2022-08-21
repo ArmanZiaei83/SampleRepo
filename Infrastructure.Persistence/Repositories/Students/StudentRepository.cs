@@ -2,7 +2,7 @@
 using Infrastructure.Persistence.DbContext;
 using Sample.Application.Contracts.Repositories;
 
-namespace Infrastructure.Persistence.Repositories.Student
+namespace Infrastructure.Persistence.Repositories.Students
 {
     public class StudentRepository : IStudentRepository
     {

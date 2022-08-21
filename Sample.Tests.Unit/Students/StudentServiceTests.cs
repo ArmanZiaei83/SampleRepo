@@ -2,15 +2,13 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.Extensions.DependencyInjection;
 using Sample.Application.Contracts.Services;
 using Sample.Application.Exceptions;
-using Sample.Test.Tools.Student;
+using Sample.Test.Tools.Students;
 using Sample.Tests.Unit.Infrastructures;
-using SQLitePCL;
 using Xunit;
 
-namespace Sample.Tests.Unit.Student
+namespace Sample.Tests.Unit.Students
 {
     public class StudentServiceTests : PersistentTest
     {

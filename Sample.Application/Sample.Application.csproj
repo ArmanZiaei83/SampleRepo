@@ -7,11 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Sample.Domain\Sample.Domain.csproj" />
+      <Folder Include="Exceptions" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Exceptions" />
+      <ProjectReference Include="..\Sample.Domain\Sample.Domain.csproj" />
     </ItemGroup>
 
 </Project>

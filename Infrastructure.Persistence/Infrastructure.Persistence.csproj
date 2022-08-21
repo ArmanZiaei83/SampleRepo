@@ -20,11 +20,4 @@
         <ProjectReference Include="..\Sample.Domain\Sample.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <EmbeddedResource Include="Migrations\appsettings.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      </EmbeddedResource>
-    </ItemGroup>
-
 </Project>

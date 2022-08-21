@@ -6,7 +6,8 @@ namespace Sample.Application.DTOs
     {
         [Required] public string Name { get; set; }
 
-        [Required] public string PhoneNumber { get; set; }
+        [Required]
+        public string PhoneNumber { get; set; }
 
         [Required] public string NationalCode { get; set; }
     }

@@ -1,9 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Sample.Application.Contracts.Services;
+using Sample.Application.Exceptions;
 using Sample.Test.Tools.Teachers;
 using Sample.Tests.Unit.Infrastructures;
+using SQLitePCL;
 using Xunit;
 
 namespace Sample.Tests.Unit.Teachers
@@ -23,7 +26,7 @@ namespace Sample.Tests.Unit.Teachers
             var dto = new AddTeacherDtoBuilder()
                 .WithName("dummy-name")
                 .WithNationalCode("2283876524")
-                .WithPhoneNumber("939999999")
+                .WithPhoneNumber("9397777777")
                 .Build();
 
             var teacherId = await _sut.Add(dto);
@@ -33,6 +36,31 @@ namespace Sample.Tests.Unit.Teachers
             actualResult.Name.Should().Be(dto.Name);
             actualResult.NationalCode.Should().Be(dto.NationalCode);
             actualResult.PhoneNumber.Should().Be(dto.PhoneNumber);
+        }
+
+        [Theory]
+        [InlineData("93971368")]
+        [InlineData("9893971368")]
+        public async Task
+            Add_throws_IncorrectPhoneNumberException_when_teacher_phone_number_is_incorrect(
+                string invalidPhoneNumber)
+        {
+            var dto = new AddTeacherDtoBuilder()
+                .WithName("dummy-name")
+                .WithNationalCode("2283876524")
+                .WithPhoneNumber(invalidPhoneNumber)
+                .Build();
+
+            Func<Task> actualResult = () => _sut.Add(dto);
+
+            await actualResult.Should()
+                .ThrowExactlyAsync<IncorrectPhoneNumberException>();
+        }
+
+        [Fact]
+        public void
+            Add_throws_InvalidNationalCodeException_when_teacher_national_code_is_incorect()
+        {
         }
     }
 }

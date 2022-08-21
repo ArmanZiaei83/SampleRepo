@@ -3,7 +3,9 @@ using Sample.Application.Contracts;
 using Sample.Application.Contracts.Repositories;
 using Sample.Application.Contracts.Services;
 using Sample.Application.DTOs;
+using Sample.Application.Exceptions;
 using Sample.Domain.Entities;
+using Sample.Infrastructure.Shared;
 
 namespace Sample.Application.Teachers
 {
@@ -23,6 +25,8 @@ namespace Sample.Application.Teachers
 
         public async Task<int> Add(AddTeacherDto dto)
         {
+            ThrowExceptionWhenPhoneNumberIsIncorrect(dto.PhoneNumber);
+            ThrowExceptionWhenNationalCodeIsIncorrect(dto.NationalCode);
             var teacher = new Teacher
             {
                 Name = dto.Name,
@@ -34,6 +38,22 @@ namespace Sample.Application.Teachers
             await _unitOfWork.Complete();
 
             return teacher.Id;
+        }
+        
+        private void ThrowExceptionWhenPhoneNumberIsIncorrect(
+            string phoneNumber)
+        {
+            var isValid = PhoneNumberValidator.IsValid(phoneNumber);
+            if (!isValid)
+                throw new IncorrectPhoneNumberException();
+        }
+        
+        private void ThrowExceptionWhenNationalCodeIsIncorrect(
+            string nationalCode)
+        {
+            var isValid = NationalCodeValidator.IsValid(nationalCode);
+            if (!isValid)
+                throw new InvalidNationalCodeException();
         }
     }
 }

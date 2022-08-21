@@ -3,12 +3,12 @@ using Infrastructure.Persistence.InMemoryDatabase;
 
 namespace Sample.Tests.Unit.Infrastructures
 {
-    public class PersistentTest
+    public class TestProvider
     {
         protected readonly EFDataContext _dataContext;
         protected readonly EFDataContext _readDataContext;
 
-        protected PersistentTest()
+        protected TestProvider()
         {
             var memoryDatabase = new EFInMemoryDatabase();
             _dataContext = memoryDatabase.CreateDataContext<EFDataContext>();

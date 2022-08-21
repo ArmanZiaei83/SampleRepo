@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Sample.Tests.Unit.Students
 {
-    public class StudentServiceTests : PersistentTest
+    public class StudentServiceTests : TestProvider
     {
         private readonly IStudentService _sut;
 
@@ -24,7 +24,7 @@ namespace Sample.Tests.Unit.Students
         {
             var dto = new AddStudentDtoBuilder()
                 .WithName("dummy-name")
-                .WithNationalCode("2283876524")
+                .WithNationalCode("2833411839")
                 .WithPhoneNumber("09397133333")
                 .Build();
 

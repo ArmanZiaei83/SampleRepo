@@ -12,7 +12,7 @@ namespace Sample.Test.Tools.Students
             {
                 Name = "dummy-name",
                 PhoneNumber = "9399999999",
-                NationalCode = "2283876524"
+                NationalCode = "2833411839"
             };
         }
 

@@ -10,11 +10,11 @@ using Xunit;
 
 namespace Sample.Tests.Unit.Teachers
 {
-    public class TeacherServiceTests : PersistentTest
+    public class TeacherServiceUnitTests : TestProvider
     {
         private readonly ITeacherService _sut;
 
-        public TeacherServiceTests()
+        public TeacherServiceUnitTests()
         {
             _sut = TeacherFactory.CreateService(_dataContext);
         }
@@ -24,7 +24,7 @@ namespace Sample.Tests.Unit.Teachers
         {
             var dto = new AddTeacherDtoBuilder()
                 .WithName("dummy-name")
-                .WithNationalCode("2283876524")
+                .WithNationalCode("2833411839")
                 .WithPhoneNumber("9397777777")
                 .Build();
 

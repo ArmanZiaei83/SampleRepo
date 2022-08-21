@@ -1,8 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <Nullable>enable</Nullable>
+
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
@@ -22,8 +23,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Infrastructure.Persistence\Infrastructure.Persistence.csproj" />
-        <ProjectReference Include="..\Sample.Test.Tools\Sample.Test.Tools.csproj" />
+      <ProjectReference Include="..\Infrastructure.Persistence\Infrastructure.Persistence.csproj" />
+      <ProjectReference Include="..\Sample.Infrastructure.Shared\Sample.Infrastructure.Shared.csproj" />
+      <ProjectReference Include="..\Sample.Test.Tools\Sample.Test.Tools.csproj" />
     </ItemGroup>
+
 
 </Project>

@@ -6,11 +6,10 @@ namespace Sample.Infrastructure.Shared
     {
         public static bool IsValid(string phoneNumber)
         {
-            if (string.IsNullOrEmpty(phoneNumber)) return false;
-            if (phoneNumber.Length < 10) return false;
-            var isValid = Regex.IsMatch(phoneNumber,
-                "(0|\\+98)?([ ]|-|[()]){0,2}9[1|2|3|4]([ ]|-|[()]){0,2}(?:[0-9]([ ]|-|[()]){0,2}){8}");
-            return isValid;
+            var mobileNumber = phoneNumber.TrimStart('0');
+            var number = $"0{mobileNumber}";
+            var pattern = new Regex(@"^(09)([0|1|2|3][1-9]{1}[0-9]{3}[0-9]{4})$");
+            return pattern.IsMatch(number);
         }
     }
 }

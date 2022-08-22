@@ -1,0 +1,30 @@
+﻿version: "2.9"
+
+services:
+  sql-server:
+    image: mcr.microsoft.com/mssql/server
+    networks:
+      - sql-network
+    ports:
+      - "5435:1433"
+    environment:
+      SA_PASSWORD: "Arman123!"
+      ACCEPT_EULA: "Y"
+
+  migrations:
+    build:
+      context: .
+    expose:
+      - 80
+    depends_on:
+      sql-server:
+        condition: service_started
+    networks:
+      - sql-network
+    restart: on-failure
+    environment:
+      CONNECTION_STRING: "Server=172.21.0.1,5435; Database=Test;User Id=sa; Password=Arman123!;"
+
+networks:
+  sql-network:
+    name: sql-network

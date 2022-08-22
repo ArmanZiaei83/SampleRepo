@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using FluentMigrator.Runner;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -8,26 +9,21 @@ namespace Sample.Migrations
 {
     internal class Runner
     {
-        private static void Main(string[] args)
+        internal static void Main(string[] args)
         {
-            var options = GetSettings(args, Directory.GetCurrentDirectory());
-
-            var connectionString = options.ConnectionString;
-
+            var connectionString = GetConnectionString();
             CreateDatabase(connectionString);
-
-            var runner = CreateRunner(connectionString, options);
-
+            var runner = CreateRunner(connectionString);
             runner.MigrateUp();
         }
 
         private static void CreateDatabase(string connectionString)
         {
             var databaseName = GetDatabaseName(connectionString);
-            var masterConnectionString = ChangeDatabaseName
-                (connectionString, "master");
-            var commandScript = $"if db_id(N'{databaseName}') is null " +
-                                $"create database [{databaseName}]";
+            var masterConnectionString =
+                ChangeDatabaseName(connectionString, "master");
+            var commandScript =
+                $"if db_id(N'{databaseName}') is null create database [{databaseName}]";
 
             using var connection = new SqlConnection(masterConnectionString);
             connection.Open();
@@ -39,8 +35,8 @@ namespace Sample.Migrations
             connection.Close();
         }
 
-        private static string ChangeDatabaseName
-            (string connectionString, string databaseName)
+        private static string ChangeDatabaseName(string connectionString,
+            string databaseName)
         {
             var csb = new SqlConnectionStringBuilder(connectionString)
             {
@@ -51,12 +47,11 @@ namespace Sample.Migrations
 
         private static string GetDatabaseName(string connectionString)
         {
-            return new
-                SqlConnectionStringBuilder(connectionString).InitialCatalog;
+            return new SqlConnectionStringBuilder(connectionString)
+                .InitialCatalog;
         }
 
-        private static IMigrationRunner CreateRunner
-            (string connectionString, MigrationSettings options)
+        private static IMigrationRunner CreateRunner(string connectionString)
         {
             var container = new ServiceCollection()
                 .AddFluentMigratorCore()
@@ -64,27 +59,39 @@ namespace Sample.Migrations
                     .AddSqlServer()
                     .WithGlobalConnectionString(connectionString)
                     .ScanIn(typeof(Runner).Assembly).For.All())
-                .AddSingleton(options)
+                .AddSingleton(new MigrationSettings(){ConnectionString = connectionString})
                 .AddLogging(_ => _.AddFluentMigratorConsole())
                 .BuildServiceProvider();
             return container.GetRequiredService<IMigrationRunner>();
         }
 
-        private static MigrationSettings GetSettings
-            (string[] args, string baseDir)
+        private static string GetConnectionString()
+        {
+            var isDevelopment = GetDevelopmentUsageValue();
+            if (isDevelopment)
+                return GetDevelopmentConnectionString();
+            var connectionString = Environment.GetEnvironmentVariable
+                ("CONNECTION_STRING", EnvironmentVariableTarget.Process);
+            return connectionString;
+        }
+
+        private static string GetDevelopmentConnectionString()
         {
             var configurations = new ConfigurationBuilder()
-                .SetBasePath(baseDir)
-                .AddJsonFile
-                    ("appsettings.json", true, true)
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appSettings.json", true, true)
                 .AddEnvironmentVariables()
-                .AddCommandLine(args)
                 .Build();
 
-            var settings = new MigrationSettings();
-            settings.ConnectionString =
-                configurations.GetValue<string>("ConnectionString");
-            return settings;
+            return configurations["ConnectionString"];
+        }
+
+        public static bool GetDevelopmentUsageValue()
+        {
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", false).Build();
+            return bool.Parse(config["IsDevelopment"]);
         }
     }
 

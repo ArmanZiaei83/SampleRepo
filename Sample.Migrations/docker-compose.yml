@@ -2,11 +2,12 @@
 
 services:
   sql-server:
+    container_name: mssql
     image: mcr.microsoft.com/mssql/server
     networks:
       - sql-network
     ports:
-      - "5435:1433"
+      - "1401:1433"
     environment:
       SA_PASSWORD: "Arman123!"
       ACCEPT_EULA: "Y"
@@ -15,7 +16,7 @@ services:
     build:
       context: .
     expose:
-      - 80
+      - 88
     depends_on:
       sql-server:
         condition: service_started
@@ -23,7 +24,7 @@ services:
       - sql-network
     restart: on-failure
     environment:
-      CONNECTION_STRING: "Server=172.21.0.1,5435; Database=Test;User Id=sa; Password=Arman123!;"
+      CONNECTION_STRING: "Server=mssql,1433; Database=Test;User Id=sa; Password=Arman123!;"
 
 networks:
   sql-network:

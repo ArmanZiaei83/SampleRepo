@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Autofac;
 using Infrastructure.Persistence.DbContext;
 using Infrastructure.Persistence.Repositories.Teachers;
@@ -14,12 +15,22 @@ namespace Sample.WebApi.Configs
     public class ServiceConfigs : Module
     {
         private readonly IConfigurationRoot _configuration;
+        private readonly string? _dbConnectionString;
 
         public ServiceConfigs()
         {
             _configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json").Build();
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables()
+                .Build();
+            
+            var isDevelopment =
+                Convert.ToBoolean(_configuration["IsDevelopment"]);
+            
+            _dbConnectionString = isDevelopment
+                ? _configuration["ConnectionString"]
+                : Environment.GetEnvironmentVariable("CONNECTION_STRING");
         }
 
         protected override void Load(ContainerBuilder builder)
@@ -35,8 +46,7 @@ namespace Sample.WebApi.Configs
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<EFDataContext>()
-                .WithParameter("connectionString",
-                    _configuration["ConnectionString"])
+                .WithParameter("connectionString", _dbConnectionString)
                 .AsSelf()
                 .InstancePerLifetimeScope();
 

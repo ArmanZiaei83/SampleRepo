@@ -1,0 +1,72 @@
+version: "3.8"
+
+services:
+  sql-server:
+    container_name: mssql
+    image: mcr.microsoft.com/mssql/server
+    networks:
+      - sql-network
+    ports:
+      - "1401:1433"
+    expose:
+      - 80
+    environment:
+      SA_PASSWORD: "Arman123!"
+      ACCEPT_EULA: "Y"
+
+  migrations:
+    build:
+      context: Sample.Migrations
+      dockerfile: Dockerfile
+    depends_on:
+      - sql-server
+    networks:
+      - sql-network
+    expose:
+      - 80
+    restart: on-failure
+    environment:
+      CONNECTION_STRING: "Server=mssql,1433; Database=Test;User Id=sa; Password=Arman123!;"
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256m
+        reservations:
+          memory: 128m
+          cpus: "0.25"
+
+  rest-api:
+    build:
+      context: .
+      dockerfile: Sample.WebApi/Dockerfile
+      args:
+        PORT: 88
+    depends_on:
+      - migrations
+      - sql-server
+    networks:
+      - sql-network
+    expose:
+      - 80
+    ports:
+      - "8080:80"
+      - "8081:80"
+      - "8082:80"
+    environment:
+      CONNECTION_STRING: "Server=mssql,1433; Database=Test;User Id=sa; Password=Arman123!;"
+      ASPNETCORE_ENVIRONMENT: "Development"
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 2GB
+        reservations:
+          memory: 2GB
+          cpus: "0.25"
+
+networks:
+  sql-network:
+    name: sql-network

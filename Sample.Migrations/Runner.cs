@@ -59,7 +59,8 @@ namespace Sample.Migrations
                     .AddSqlServer()
                     .WithGlobalConnectionString(connectionString)
                     .ScanIn(typeof(Runner).Assembly).For.All())
-                .AddSingleton(new MigrationSettings(){ConnectionString = connectionString})
+                .AddSingleton(new MigrationSettings
+                    {ConnectionString = connectionString})
                 .AddLogging(_ => _.AddFluentMigratorConsole())
                 .BuildServiceProvider();
             return container.GetRequiredService<IMigrationRunner>();

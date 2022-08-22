@@ -9,11 +9,12 @@ using Xunit;
 
 namespace Test.Specifications.Students.Add
 {
+    [Scenario("Adding a new student.")]
     public class AddStudentSuccessfully : TestProvider
     {
         private readonly IStudentService _sut;
         private int _studentId;
- 
+
         public AddStudentSuccessfully()
         {
             _sut = StudentFactory.CreateService(_dataContext);

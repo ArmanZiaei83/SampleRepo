@@ -24,10 +24,10 @@ namespace Sample.WebApi.Configs
                 .AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables()
                 .Build();
-            
+
             var isDevelopment =
                 Convert.ToBoolean(_configuration["IsDevelopment"]);
-            
+
             _dbConnectionString = isDevelopment
                 ? _configuration["ConnectionString"]
                 : Environment.GetEnvironmentVariable("CONNECTION_STRING");

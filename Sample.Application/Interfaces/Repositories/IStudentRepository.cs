@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Sample.Application.Students;
 using Sample.Domain.Entities;
 
 namespace Sample.Application.Interfaces.Repositories
@@ -9,5 +8,6 @@ namespace Sample.Application.Interfaces.Repositories
         public void Add(Student student);
         void DeleteById(Student student);
         ValueTask<Student?> Find(int id);
+        Task<bool> Exists(int id);
     }
 }

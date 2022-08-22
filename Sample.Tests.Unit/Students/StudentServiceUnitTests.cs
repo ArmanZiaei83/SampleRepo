@@ -4,11 +4,9 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Sample.Application.Exceptions;
 using Sample.Application.Interfaces.Services;
-using Sample.Application.Students;
 using Sample.Domain.Entities;
 using Sample.Test.Tools.Students;
 using Sample.Tests.Unit.Infrastructures;
-using SQLitePCL;
 using Xunit;
 
 namespace Sample.Tests.Unit.Students
@@ -84,11 +82,14 @@ namespace Sample.Tests.Unit.Students
         [Theory]
         [InlineData(-1)]
         [InlineData(0)]
-        public async Task Delete_throws_StudentNotFoundException_when_student_has_not_found(int invalidStudentId)
+        public async Task
+            Delete_throws_StudentNotFoundException_when_student_has_not_found(
+                int invalidStudentId)
         {
             Func<Task> actualResult = () => _sut.DeleteById(invalidStudentId);
-            
-            await actualResult.Should().ThrowExactlyAsync<StudentNotFoundException>();
+
+            await actualResult.Should()
+                .ThrowExactlyAsync<StudentNotFoundException>();
         }
 
         private int CreateStudent()

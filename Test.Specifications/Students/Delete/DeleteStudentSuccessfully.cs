@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Test.Specifications.Students.Delete
 {
-    [Scenario("Deleting a student")]
+    [Scenario("Deleting an existing student")]
     public class DeleteStudentSuccessfully : TestProvider
     {
         private readonly IStudentService _sut;
@@ -47,7 +47,7 @@ namespace Test.Specifications.Students.Delete
         private void Then()
         {
             _readDataContext.Students.Should().NotContain(_ =>
-                _.Id == _student.Id && 
+                _.Id == _student.Id &&
                 _.Name == _student.Name &&
                 _.NationalCode == _student.NationalCode &&
                 _.PhoneNumber == _student.PhoneNumber);

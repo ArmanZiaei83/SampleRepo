@@ -12,7 +12,6 @@ namespace Sample.Application.Teachers
     public class TeacherService : ITeacherService
     {
         private readonly ITeacherRepository _repository;
-
         private readonly IUnitOfWork _unitOfWork;
 
         public TeacherService(

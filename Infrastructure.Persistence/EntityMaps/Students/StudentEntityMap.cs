@@ -14,9 +14,6 @@ namespace Infrastructure.Persistence.EntityMaps.Students
             _.Property(_ => _.Name);
             _.Property(_ => _.NationalCode);
             _.Property(_ => _.PhoneNumber);
-            _.HasMany(_ => _.Courses)
-                .WithOne(_ => _.Student)
-                .HasForeignKey(_ => _.StudentId);
         }
     }
 }

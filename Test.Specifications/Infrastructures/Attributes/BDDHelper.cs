@@ -21,44 +21,44 @@ namespace Test.Specifications.Infrastructures.Attributes
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class Scenario : Attribute
     {
-        public string Title { get; set; }
-
         public Scenario(string title)
         {
             Title = title;
         }
+
+        public string Title { get; set; }
     }
-    
+
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public class Given : Attribute
     {
-        private string Title { get; set; }
-
         public Given(string title)
         {
             Title = title;
         }
+
+        private string Title { get; }
     }
 
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public class When : Attribute
     {
-        private string Title { get; set; }
-
         public When(string title)
         {
             Title = title;
         }
+
+        private string Title { get; }
     }
 
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public class Then : Attribute
     {
-        private string Title { get; set; }
-
         public Then(string title)
         {
             Title = title;
         }
+
+        private string Title { get; }
     }
 }

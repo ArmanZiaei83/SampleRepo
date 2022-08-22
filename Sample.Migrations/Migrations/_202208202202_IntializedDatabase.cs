@@ -12,12 +12,6 @@ namespace Sample.Migrations.Migrations
             CreateStudentsTable();
 
             CreateTeachersTable();
-
-            CreateCoursesTable();
-
-            CreateTeacherCoursesTable();
-
-            CreateStudentCoursesTable();
         }
 
         public override void Down()
@@ -45,37 +39,6 @@ namespace Sample.Migrations.Migrations
                 .WithColumn("Name").AsString().NotNullable()
                 .WithColumn("NationalCode").AsString().NotNullable()
                 .WithColumn("PhoneNumber").AsString().NotNullable();
-        }
-
-        private void CreateCoursesTable()
-        {
-            Create.Table("Courses")
-                .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("Name").AsString().NotNullable()
-                .WithColumn("StartDateTime").AsDateTime()
-                .WithColumn("EndDateTime").AsDateTime()
-                .WithColumn("StartTime").AsString()
-                .WithColumn("EndTime").AsString();
-        }
-
-        private void CreateTeacherCoursesTable()
-        {
-            Create.Table("TeacherCourses")
-                .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("TeacherId").AsInt32().NotNullable()
-                .ForeignKey("FK_TeacherCourses_Teachers", "Teachers", "Id")
-                .WithColumn("CourseId").AsInt32().NotNullable()
-                .ForeignKey("FK_TeacherCourses_Courses", "Courses", "Id");
-        }
-
-        private void CreateStudentCoursesTable()
-        {
-            Create.Table("StudentCourses")
-                .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("StudentId").AsInt32().NotNullable()
-                .ForeignKey("FK_StudentCourses_Students", "Students", "Id")
-                .WithColumn("CourseId").AsInt32().NotNullable()
-                .ForeignKey("FK_StudentCourses_Courses", "Courses", "Id");
         }
     }
 }

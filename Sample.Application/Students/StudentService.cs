@@ -41,15 +41,16 @@ namespace Sample.Application.Students
 
         public async Task DeleteById(int id)
         {
+            await ThrowExceptionWhenStudentHasNotFound(id);
             var student = await _repository.Find(id);
-            ThrowExceptionWhenStudentHasNotFound(student);
             _repository.DeleteById(student);
             await _unitOfWork.Complete();
         }
 
-        private void ThrowExceptionWhenStudentHasNotFound(Student? student)
+        private async Task ThrowExceptionWhenStudentHasNotFound(int studentId)
         {
-            if (student is null)
+            var exists = await _repository.Exists(studentId);
+            if (!exists)
                 throw new StudentNotFoundException();
         }
 

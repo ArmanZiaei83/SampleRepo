@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Persistence.DbContext;
+using Microsoft.EntityFrameworkCore;
 using Sample.Application.Interfaces.Repositories;
 using Sample.Domain.Entities;
 
@@ -6,16 +7,16 @@ namespace Infrastructure.Persistence.Repositories.Teachers
 {
     public class TeacherRepository : ITeacherRepository
     {
-        private readonly EFDataContext _dataContext;
+        private readonly DbSet<Teacher> _teachers;
 
         public TeacherRepository(EFDataContext dataContext)
         {
-            _dataContext = dataContext;
+            _teachers = dataContext.Teachers;
         }
 
         public void Add(Teacher teacher)
         {
-            _dataContext.Teachers.Add(teacher);
+            _teachers.Add(teacher);
         }
     }
 }

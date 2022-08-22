@@ -9,6 +9,7 @@ using Xunit;
 
 namespace Test.Specifications.Teachers.Add
 {
+    [Scenario("Adding a new teacher.")]
     public class AddTeacherSuccessfully : TestProvider
     {
         private readonly ITeacherService _sut;
@@ -58,6 +59,5 @@ namespace Test.Specifications.Teachers.Add
                 _ => Then()
             );
         }
-
     }
 }

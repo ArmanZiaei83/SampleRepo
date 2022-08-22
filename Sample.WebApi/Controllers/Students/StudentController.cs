@@ -21,5 +21,11 @@ namespace Sample.WebApi.Controllers.Students
         {
             return await _service.Add(dto);
         }
+
+        [HttpDelete]
+        public async Task Delete(int id)
+        {
+            await _service.DeleteById(id);
+        }
     }
 }

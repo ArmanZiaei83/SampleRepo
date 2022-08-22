@@ -39,6 +39,20 @@ namespace Sample.Application.Students
             return student.Id;
         }
 
+        public async Task DeleteById(int id)
+        {
+            var student = await _repository.Find(id);
+            ThrowExceptionWhenStudentHasNotFound(student);
+            _repository.DeleteById(student);
+            await _unitOfWork.Complete();
+        }
+
+        private void ThrowExceptionWhenStudentHasNotFound(Student? student)
+        {
+            if (student is null)
+                throw new StudentNotFoundException();
+        }
+
         private void ThrowExceptionWhenPhoneNumberIsIncorrect(
             string phoneNumber)
         {

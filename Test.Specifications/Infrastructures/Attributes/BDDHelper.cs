@@ -18,7 +18,7 @@ namespace Test.Specifications.Infrastructures.Attributes
         }
     }
 
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class Scenario : Attribute
     {
         public string Title { get; set; }

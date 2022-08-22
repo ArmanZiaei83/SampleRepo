@@ -19,6 +19,16 @@ namespace Infrastructure.Persistence.Repositories.Students
             _dataContext.Students.Add(student);
         }
 
+        public void DeleteById(Student student)
+        {
+            _dataContext.Students.Remove(student);
+        }
+
+        public ValueTask<Student?> Find(int id)
+        {
+            return _dataContext.Students.FindAsync(id);
+        }
+
         public async Task Save()
         {
             await _dataContext.SaveChangesAsync();

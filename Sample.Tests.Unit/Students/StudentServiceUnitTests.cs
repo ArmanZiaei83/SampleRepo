@@ -4,8 +4,11 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Sample.Application.Exceptions;
 using Sample.Application.Interfaces.Services;
+using Sample.Application.Students;
+using Sample.Domain.Entities;
 using Sample.Test.Tools.Students;
 using Sample.Tests.Unit.Infrastructures;
+using SQLitePCL;
 using Xunit;
 
 namespace Sample.Tests.Unit.Students
@@ -65,6 +68,39 @@ namespace Sample.Tests.Unit.Students
 
             actualResult.Should()
                 .ThrowExactlyAsync<InvalidNationalCodeException>();
+        }
+
+        [Fact]
+        public void DeleteById_deletes_a_student_by_id_properly()
+        {
+            var studentId = CreateStudent();
+
+            _sut.DeleteById(studentId);
+
+            _readDataContext.Students.Should().HaveCount(0)
+                .And.NotContain(_ => _.Id == studentId);
+        }
+
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(0)]
+        public async Task Delete_throws_StudentNotFoundException_when_student_has_not_found(int invalidStudentId)
+        {
+            Func<Task> actualResult = () => _sut.DeleteById(invalidStudentId);
+            
+            await actualResult.Should().ThrowExactlyAsync<StudentNotFoundException>();
+        }
+
+        private int CreateStudent()
+        {
+            var student = new Student
+            {
+                Name = "dummy-name",
+                PhoneNumber = "dummy-phone-number",
+                NationalCode = "dummy-national-code"
+            };
+            Save(student);
+            return student.Id;
         }
     }
 }

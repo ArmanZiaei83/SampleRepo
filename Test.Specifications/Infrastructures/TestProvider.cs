@@ -1,12 +1,12 @@
-﻿using Infrastructure.Persistence.DbContext;
+﻿using Infrastructure.Persistence.Contexts;
 using Infrastructure.Persistence.InMemoryDatabase;
 
 namespace Test.Specifications.Infrastructures
 {
     public class TestProvider
     {
-        protected readonly EFDataContext _dataContext;
-        protected readonly EFDataContext _readDataContext;
+        protected readonly EFDataContext? _dataContext;
+        protected readonly EFDataContext? _readDataContext;
 
         protected TestProvider()
         {

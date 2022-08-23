@@ -94,12 +94,11 @@ namespace Sample.Tests.Unit.Students
 
         private int CreateStudent()
         {
-            var student = new Student
-            {
-                Name = "dummy-name",
-                PhoneNumber = "dummy-phone-number",
-                NationalCode = "dummy-national-code"
-            };
+            var student = new StudentBuilder()
+                .WithName("dummy-name")
+                .WithPhoneNumber("dummy-phone-number")
+                .WithNationalCode("dummy-national-code")
+                .Build();
             Save(student);
             return student.Id;
         }

@@ -1,4 +1,5 @@
 ﻿using Sample.Application.DTOs;
+using Sample.Application.DTOs.Students;
 
 namespace Sample.Test.Tools.Students
 {

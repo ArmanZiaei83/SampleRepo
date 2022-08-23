@@ -1,11 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Sample.Application.DTOs;
+using Sample.Application.DTOs.Students;
 using Sample.Application.Exceptions;
 using Sample.Application.Interfaces;
 using Sample.Application.Interfaces.Repositories;
 using Sample.Application.Interfaces.Services;
 using Sample.Domain.Entities;
 using Sample.Infrastructure.Shared;
+using Sample.Infrastructure.Shared.Validations;
 
 namespace Sample.Application.Students
 {
@@ -26,13 +28,13 @@ namespace Sample.Application.Students
         {
             ThrowExceptionWhenPhoneNumberIsIncorrect(dto.PhoneNumber);
             ThrowExceptionWhenNationalCodeIsIncorrect(dto.NationalCode);
+
             var student = new Student
             {
                 Name = dto.Name,
                 NationalCode = dto.NationalCode,
                 PhoneNumber = dto.PhoneNumber
             };
-
             _repository.Add(student);
             await _unitOfWork.Complete();
 
@@ -42,6 +44,7 @@ namespace Sample.Application.Students
         public async Task DeleteById(int id)
         {
             await ThrowExceptionWhenStudentHasNotFound(id);
+
             var student = await _repository.Find(id);
             _repository.DeleteById(student);
             await _unitOfWork.Complete();
@@ -50,24 +53,21 @@ namespace Sample.Application.Students
         private async Task ThrowExceptionWhenStudentHasNotFound(int studentId)
         {
             var exists = await _repository.Exists(studentId);
-            if (!exists)
-                throw new StudentNotFoundException();
+            if (!exists) throw new StudentNotFoundException();
         }
 
         private void ThrowExceptionWhenPhoneNumberIsIncorrect(
             string phoneNumber)
         {
             var isValid = PhoneNumberValidator.IsValid(phoneNumber);
-            if (!isValid)
-                throw new IncorrectPhoneNumberException();
+            if (!isValid) throw new IncorrectPhoneNumberException();
         }
 
         private void ThrowExceptionWhenNationalCodeIsIncorrect(
             string nationalCode)
         {
             var isValid = NationalCodeValidator.IsValid(nationalCode);
-            if (!isValid)
-                throw new InvalidNationalCodeException();
+            if (!isValid) throw new InvalidNationalCodeException();
         }
     }
 }

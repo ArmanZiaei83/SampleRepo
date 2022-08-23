@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Sample.Infrastructure.Shared
+namespace Sample.Infrastructure.Shared.Validations
 {
     public static class PhoneNumberValidator
     {

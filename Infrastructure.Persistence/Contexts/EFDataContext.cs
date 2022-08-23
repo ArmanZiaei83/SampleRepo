@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Sample.Domain.Entities;
 
-namespace Infrastructure.Persistence.DbContext
+namespace Infrastructure.Persistence.Contexts
 {
-    public class EFDataContext : Microsoft.EntityFrameworkCore.DbContext
+    public class EFDataContext : DbContext
     {
         public EFDataContext(DbContextOptions<EFDataContext> options) : base(
             options)

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using Sample.Infrastructure.Shared;
+using Sample.Infrastructure.Shared.Extensions;
 
 namespace Test.Specifications.Infrastructures.Attributes
 {

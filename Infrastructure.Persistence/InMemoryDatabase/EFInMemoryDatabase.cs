@@ -21,7 +21,7 @@ namespace Infrastructure.Persistence.InMemoryDatabase
         }
 
         private ConstructorInfo? FindSuitableConstructor<TDbContext>()
-            where TDbContext : Microsoft.EntityFrameworkCore.DbContext
+            where TDbContext : DbContext
         {
             var flags = BindingFlags.Instance |
                         BindingFlags.Public |
@@ -45,8 +45,8 @@ namespace Infrastructure.Persistence.InMemoryDatabase
             return constructor;
         }
 
-        private Func<TDbContext> ResolveFactory<TDbContext>()
-            where TDbContext : Microsoft.EntityFrameworkCore.DbContext
+        private Func<TDbContext?> ResolveFactory<TDbContext>()
+            where TDbContext : DbContext
         {
             var dbContextOptions = new DbContextOptionsBuilder<TDbContext>()
                 .UseSqlite(_connection).Options;
@@ -59,14 +59,13 @@ namespace Infrastructure.Persistence.InMemoryDatabase
                     "with one parameter of type " +
                     $"DbContextOptions<{typeof(TDbContext).Name}>/DbContextOptions");
 
-            return () =>
-                constructor.Invoke(new object[] {dbContextOptions}) as
-                    TDbContext;
+            return () => constructor.Invoke(new object[] {dbContextOptions})
+                as TDbContext;
         }
 
-        public TDbContext CreateDataContext<TDbContext>(
+        public TDbContext? CreateDataContext<TDbContext>(
             params object[] entities)
-            where TDbContext : Microsoft.EntityFrameworkCore.DbContext
+            where TDbContext : DbContext
         {
             var dbContext = ResolveFactory<TDbContext>().Invoke();
             dbContext.Database.EnsureCreated();
@@ -78,17 +77,6 @@ namespace Infrastructure.Persistence.InMemoryDatabase
             }
 
             return dbContext;
-        }
-    }
-
-    public static class DbContextHelper
-    {
-        public static void Manipulate<TDbContext>(this TDbContext dbContext,
-            Action<TDbContext> manipulate)
-            where TDbContext : Microsoft.EntityFrameworkCore.DbContext
-        {
-            manipulate(dbContext);
-            dbContext.SaveChanges();
         }
     }
 }

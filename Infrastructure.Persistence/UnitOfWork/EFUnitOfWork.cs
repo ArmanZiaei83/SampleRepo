@@ -1,14 +1,14 @@
 ﻿using System.Threading.Tasks;
-using Infrastructure.Persistence.DbContext;
+using Infrastructure.Persistence.Contexts;
 using Sample.Application.Interfaces;
 
 namespace Infrastructure.Persistence.UnitOfWork
 {
     public class EFUnitOfWork : IUnitOfWork
     {
-        private readonly EFDataContext _dataContext;
+        private readonly EFDataContext? _dataContext;
 
-        public EFUnitOfWork(EFDataContext dataContext)
+        public EFUnitOfWork(EFDataContext? dataContext)
         {
             _dataContext = dataContext;
         }

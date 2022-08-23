@@ -30,6 +30,7 @@ namespace Test.Specifications.Students.Delete
                 .WithNationalCode("2833411839")
                 .WithPhoneNumber("9397136812")
                 .Build();
+            
             Save(_student);
         }
 

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Sample.Application.DTOs;
+using Sample.Application.DTOs.Teachers;
 
 namespace Sample.Application.Interfaces.Services
 {

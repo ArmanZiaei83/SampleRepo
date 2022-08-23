@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Infrastructure.Persistence.DbContext;
+using Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Sample.Application.Interfaces.Repositories;
 using Sample.Domain.Entities;
@@ -10,7 +10,7 @@ namespace Infrastructure.Persistence.Repositories.Students
     {
         private readonly DbSet<Student> _students;
 
-        public StudentRepository(EFDataContext dataContext)
+        public StudentRepository(EFDataContext? dataContext)
         {
             _students = dataContext.Students;
         }

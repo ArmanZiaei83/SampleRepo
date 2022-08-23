@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using Autofac;
-using Infrastructure.Persistence.DbContext;
+using Infrastructure.Persistence.Contexts;
 using Infrastructure.Persistence.Repositories.Teachers;
 using Infrastructure.Persistence.UnitOfWork;
 using Microsoft.Extensions.Configuration;
@@ -14,22 +14,21 @@ namespace Sample.WebApi.Configs
 {
     public class ServiceConfigs : Module
     {
-        private readonly IConfigurationRoot _configuration;
         private readonly string? _dbConnectionString;
 
         public ServiceConfigs()
         {
-            _configuration = new ConfigurationBuilder()
+            IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables()
                 .Build();
 
             var isDevelopment =
-                Convert.ToBoolean(_configuration["IsDevelopment"]);
+                Convert.ToBoolean(configuration["IsDevelopment"]);
 
             _dbConnectionString = isDevelopment
-                ? _configuration["ConnectionString"]
+                ? configuration["ConnectionString"]
                 : Environment.GetEnvironmentVariable("CONNECTION_STRING");
         }
 

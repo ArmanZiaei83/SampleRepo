@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Sample.Infrastructure.Shared
+namespace Sample.Infrastructure.Shared.Extensions
 {
     public static class ForEachExtenstion
     {

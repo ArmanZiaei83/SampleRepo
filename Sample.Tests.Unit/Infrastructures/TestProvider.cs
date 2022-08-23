@@ -1,4 +1,4 @@
-﻿using Infrastructure.Persistence.DbContext;
+﻿using Infrastructure.Persistence.Contexts;
 using Infrastructure.Persistence.InMemoryDatabase;
 
 namespace Sample.Tests.Unit.Infrastructures

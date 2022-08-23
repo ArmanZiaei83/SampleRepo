@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Sample.Application.DTOs;
+using Sample.Application.DTOs.Teachers;
 using Sample.Application.Interfaces.Services;
 
 namespace Sample.WebApi.Controllers.Teachers

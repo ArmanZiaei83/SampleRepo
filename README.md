@@ -11,7 +11,7 @@ This layer contains:
 - Interfaces (like repository and service interfaces)
 - Exceptions
 - DataTrasferObjects (DTOs)
-- Services Implementaion
+- Services Implementation
 Depends on: Domain, Infrastructures.Shared.
 <br></br>
 ### Infrastructures.Persistence Layer:
@@ -22,3 +22,13 @@ Depends on: Domain, Application.
 ### WebApi Layer:
 WebApi directory contains an ASP WebAPI project which is our application's endpoint.
 Depends on: Application.
+<br></br>
+### Running app on Docker:
+- Change <code>IsDevelopment</code> tag value into <code>false</code> from <code>Sample.Migraitons/appsettigns.json</code>.
+- Change <code>IsDevelopment</code> tag value into <code>false</code> from <code>Sample.WebApi/appsettigns.json</code>.
+- Go to the project's main directory (named: Sample) and run: <code>docker compose up</code>.
+
+Application's swagger URLs: 
+- http://localhost:8080/swagger/index.html
+- http://localhost:8081/swagger/index.html
+- http://localhost:8082/swagger/index.html
